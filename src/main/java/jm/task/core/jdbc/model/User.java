@@ -1,13 +1,13 @@
 package jm.task.core.jdbc.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Entity
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @Table
 @AllArgsConstructor

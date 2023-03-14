@@ -11,19 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
+    private final Connection connection = Util.getConnection();
+
     public UserDaoJDBCImpl() {
 
     }
 
-    private final Connection connection = Util.getConnection();
-
     public void createUsersTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS`test`.`user` (\n" +
-                "  `id` BIGINT NOT NULL AUTO_INCREMENT,\n" +
-                "  `name` VARCHAR(45) NULL,\n" +
-                "  `lastName` VARCHAR(45) NULL,\n" +
-                "  `age` INT NULL,\n" +
-                "  PRIMARY KEY (`id`));\n";
+        String sql = "CREATE TABLE IF NOT EXISTS`test`.`user` (\n" + "  `id` BIGINT NOT NULL AUTO_INCREMENT,\n" + "  `name` VARCHAR(45) NULL,\n" + "  `lastName` VARCHAR(45) NULL,\n" + "  `age` INT NULL,\n" + "  PRIMARY KEY (`id`));\n";
         try {
             connection.prepareStatement(sql).execute();
         } catch (SQLException e) {
@@ -46,7 +41,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try (final PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, name);
             statement.setString(2, lastName);
-            statement.setByte(3, age); //это нормально что так написано?
+            statement.setByte(3, age);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
